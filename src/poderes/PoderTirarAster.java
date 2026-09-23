@@ -1,8 +1,8 @@
 package poderes;
 
-public class PoderTiraAster implements IPower {
+public class PoderTirarAster implements IPower {
 
-    public PoderTiraAster() {
+    public PoderTirarAster() {
 
     }
 

@@ -10,19 +10,22 @@ public class Pirata extends Persona {
     private boolean tieneLoro;
     private String nombreLoro;
 
-    public Pirata(String pNombre, byte pEdad, String pNombreBarco) {
+    public Pirata(String pNombre, byte pEdad) {
         super(pNombre, pEdad);
-        this.nombreBarco = pNombreBarco;
+        this.nombreBarco = null;
         this.tesorosEncontrados = 0;
         this.tieneLoro = false;
     }
 
-    public String getNombreBarco() {
-        return this.nombreBarco;
-    }
-
     public void setNombreBarco(String pNombreBarco) {
         this.nombreBarco = pNombreBarco;
+    }
+
+    public String getNombreBarco() {
+        if (this.nombreBarco == null) {
+            return null;
+        }
+        return this.nombreBarco;
     }
 
      public void setTieneLoro(boolean pTieneLoro, String pNombreLoro) {
@@ -33,15 +36,29 @@ public class Pirata extends Persona {
     public String getNombreLoro() {
         if(this.tieneLoro) {
             return this.nombreLoro;
-        } else {
-            return "No tiene loro";
-        }
+        } 
+        return null;    
     }
+
     public void buscarTesoro() {
+        if (this.nombreBarco == null) {
+            System.out.println("¡Para buscar tesoros es necesario tener un barco!");
+            return;
+        }
+
+        if (this.tesorosEncontrados == 0){
+            System.out.println("¡" + this.nombre + " encontró su primer tesoro a bordo de " + this.nombreBarco + "!");
+        }else{
+            System.out.println("¡" + this.nombre + " encontró otro tesoro a bordo de " + this.nombreBarco + "!"); 
+        } 
+        
         this.tesorosEncontrados++;
-        System.out.println(this.nombre + " encontró un tesoro a bordo de " + this.nombreBarco + ".\n" +
-            " Lleva " + this.tesorosEncontrados + " tesoros encontrados.");
     }
+
+    public int getCantidadTesoros(){
+        return this.tesorosEncontrados;
+    }
+
     public void gritar() {
         System.out.println("AAAAAARRRRRRRRRR!!!");
     }

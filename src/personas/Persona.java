@@ -34,8 +34,8 @@ public class Persona {
     
     private byte edad;
     protected String nombre;
-    private String nacionalidad; //Es un atributo para ejemplificar el uso de this(); en el constructor. 
     private IPower power;
+
     // Atributo ststic, existe una sola copia, compartida por todas las Personas
     private static int cantidadPersonas = 0;
 
@@ -46,15 +46,13 @@ public class Persona {
 
     // constructor no tiene valor de retorno, y debe llamarse igual que la clase
     public Persona() {
-        // inicializar persona con sus datos, edad y nombre. 
-        edad = 19;
-        nombre = "Ignacio Hernandez";
-        nacionalidad = "Costarricense";
+        // inicializar persona con sus datos, edad, nombre y nacionalidad. 
+        edad = 1;
+        nombre = "Fulanito";
     }
 
     //Un segundo constructor que recibe paramametros
     public Persona(byte pEdad, String pNombre){
-        this();     //Esto llama al constructor sin parámetros, para inicializar los atributos de la clase. Sirve para no tener que poner los valores de los atributos en cada constructor.
         this.edad = pEdad;
         this.nombre = pNombre;
     }
@@ -65,7 +63,7 @@ public class Persona {
     }
 
     public Persona(String pNombre){
-        this.edad = 0;
+        this();                     //Llama al constructor sin parámetros, para no tener que poner todos los atributos a mano. 
         this.nombre = pNombre;
     }
 

@@ -13,13 +13,17 @@ public class Futbolista extends Persona {
         this.equipo = pEquipo;
     }
 
-    public void getNetWorth() {
-        System.out.println("El net worth del futbolista es: " + this.netWorth);
+    public int getNetWorth() {
+        return this.netWorth;
     }
 
     public void setSalario(int pSalario) {
         this.salario = pSalario;
         this.netWorth += pSalario; //Al establecer el salario, también se suma al net worth.
+    }
+
+    public int getSalario(){
+        return this.salario;
     }
 
     public void cambiarEquipo(String pNuevoEquipo) {
