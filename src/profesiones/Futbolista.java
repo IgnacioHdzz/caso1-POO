@@ -33,7 +33,7 @@ public class Futbolista extends Persona {
 
     public void pagarFutbolista(){
         this.netWorth += this.salario;
-        System.out.println("El net worth del futbolista ha amumentado.");
+        System.out.println("El net worth del futbolista ha aumentado.");
     }
 
 }
