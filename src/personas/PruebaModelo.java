@@ -1,6 +1,5 @@
-package programaMutante;
+package personas;
 
-import personas.Persona;
 import profesiones.Futbolista;
 import profesiones.Musico;
 import profesiones.Pirata;
@@ -11,7 +10,7 @@ import poderes.PoderTirarFlechas;
 import poderes.PoderTirarEstrellas;
 import poderes.PoderTirarPrimos;
 
-public class quickstart {
+public class PruebaModelo {
     public static void main(String[] args) {
         
         /* { ------- PRUEBAS DE LA CLASE PERSONA Y SUS CONSTRUCTORES VISTAS EN CLASE ---------------------}
@@ -92,7 +91,7 @@ public class quickstart {
         Persona profesionales[] = new Persona[5];
         IPower poderesDisponibles[] = {new PoderTirarAster(), new PoderTirarCelebs(), new PoderTirarFlechas(),new PoderTirarEstrellas(), new PoderTirarPrimos()};
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < profesionales.length; i++) {
             int tipoProfesion = (int)(Math.random() * 3);
             switch (tipoProfesion) {
                 case 0:
