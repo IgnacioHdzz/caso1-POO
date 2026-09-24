@@ -1,5 +1,5 @@
 package profesiones;
-
+import constantes.Constantes;
 import personas.Persona;
 
 public class Pirata extends Persona {
@@ -61,5 +61,11 @@ public class Pirata extends Persona {
 
     public void gritar() {
         System.out.println("AAAAAARRRRRRRRRR!!!");
+    }
+
+    // Sobrescribe el método de Persona: cada profesión pelea con su propio estilo (polimorfismo).
+    @Override
+    public double getProbabilidadAtaque() {
+        return Constantes.PROB_ATAQUE_PIRATA;
     }
 }

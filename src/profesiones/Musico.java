@@ -1,19 +1,16 @@
 package profesiones;
-
+import constantes.Constantes;
 import personas.Persona;
 
 public class Musico extends Persona {
-
     private String generoMusical;
     private String cancionesCompuestas[] = {};
     private int cantidadCanciones;
 
-
     public Musico(String pNombre, byte pEdad, String pGeneroMusical) {
         super(pNombre, pEdad);
         this.generoMusical = pGeneroMusical;
-        this.cancionesCompuestas = new String[5]; // Un musico puede tener un máximo de 5 canciones compuestas.
-        this.cantidadCanciones = 0;
+        this.cancionesCompuestas = new String[Constantes.MAX_CANCIONES]; // Un musico puede tener un máximo de MAX_CANCIONES canciones compuestas.
     }
 
     public void setGeneroMusical(String pGeneroMusical){
@@ -50,6 +47,12 @@ public class Musico extends Persona {
 
     public void cantar() {
         super.cantar();
+    }
+
+    // Sobrescribe el método de Persona: cada profesión pelea con su propio estilo (polimorfismo).
+    @Override
+    public double getProbabilidadAtaque() {
+        return Constantes.PROB_ATAQUE_MUSICO;
     }
 }
 

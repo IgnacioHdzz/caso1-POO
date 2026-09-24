@@ -1,5 +1,5 @@
 package profesiones;
-
+import constantes.Constantes;
 import personas.Persona;
 
 public class Futbolista extends Persona {
@@ -34,6 +34,11 @@ public class Futbolista extends Persona {
     public void pagarFutbolista(){
         this.netWorth += this.salario;
         System.out.println("El net worth del futbolista ha aumentado.");
+    }
+        // Sobrescribe el método de Persona: cada profesión pelea con su propio estilo (polimorfismo).
+    @Override
+    public double getProbabilidadAtaque() {
+        return Constantes.PROB_ATAQUE_FUTBOLISTA;
     }
 
 }
