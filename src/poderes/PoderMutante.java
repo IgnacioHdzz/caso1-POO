@@ -11,7 +11,7 @@ public abstract class PoderMutante implements IPower {
                 + Constantes.DANIO_MIN;
     }
 
-        @Override
+    @Override
     public int getDanio() {
         return this.danio;
     }

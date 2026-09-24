@@ -1,6 +1,6 @@
 package poderes;
 
-public class PoderTirarPrimos implements IPower {
+public class PoderTirarPrimos extends PoderMutante {
 
     public PoderTirarPrimos() {
 

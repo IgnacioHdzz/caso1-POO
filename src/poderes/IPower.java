@@ -1,14 +1,13 @@
-
-// las interfaces son plantillas que nos permiten definir Types que tienen un
-// comportamiento comun, pero que no tienen implementación
-// es decir, solo se declara el nombre (signature) del comportamiento
-// pero no se implementa, es decir no tiene código
-// las interfaces también pueden tener definiciones de atributos static
-
 package poderes;
 
+// Contrato de TODO poder mutante. Persona solo conoce esta interfaz, nunca los poderes concretos.
+// Las interfaces NO pueden guardar atributos de objeto (solo static), por eso el daño
+// vive en la clase abstracta PoderMutante.
 public interface IPower {
 
     public void dispararPoder();
-    
+
+    public int getDanio();
+
+    public void aumentarDanio();
 }
