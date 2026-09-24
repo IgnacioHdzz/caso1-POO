@@ -1,7 +1,5 @@
 package juego;
-
 import java.awt.Color;
-
 import personas.Persona;
 
 // Un equipo: nombre, color, símbolo y sus mutantes.
@@ -41,18 +39,21 @@ public class Equipo {
     }
 
     public int contarVivos() {
-        // falta, nota para no olvidar, se puede recorrer y contar los que estaVivo()
-        return 0;
+        int vivos = 0;
+        for (int i = 0; i < this.cantidad; i++) {
+            if (this.mutantes[i].estaVivo()) {
+                vivos++;
+            }
+        }
+        return vivos;
     }
 
     public int contarMuertos() {
-        // falta de terminar, como nota para que no se me olvide se puede calcular con contarVivos()
-        return 0;
+        return this.cantidad - this.contarVivos();
     }
 
     public boolean tieneVivos() {
-        //falta de terminar
-        return false;
+        return this.contarVivos() > 0;
     }
 
     public Persona[] getMutantes() {
