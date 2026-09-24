@@ -2,7 +2,6 @@
 Nombres de clase: La primer letra en mayúscula, esto por lo general son sustantivos o entidades, 
 cosas reales, su nombre en Singular. 
 Ej. Arbol, Casa, Carro, Persona. 
-
 Atributos: La primer letra minúscula, y si son varias palabras juntas, la primer letra de las 
 segunda palabra en adelante, en mayúscula. son adjetivos, características de la clase. 
 Ej. impuestoDeVenta, fechaIngreso, cantidadSeleccionada
