@@ -1,46 +1,30 @@
-/*
-Nombres de clase: La primer letra en mayúscula, esto por lo general son sustantivos o entidades, 
-cosas reales, su nombre en Singular. 
-Ej. Arbol, Casa, Carro, Persona. 
-Atributos: La primer letra minúscula, y si son varias palabras juntas, la primer letra de las 
-segunda palabra en adelante, en mayúscula. son adjetivos, características de la clase. 
-Ej. impuestoDeVenta, fechaIngreso, cantidadSeleccionada
-
-Métodos: mismo estandard de nombres que los atributos, pero inicia con un verbo, porque esto es comportamiento, es acción.
-Ej. cantar(), extraerDatos(), obtenerEdad(), animarMovimiento()
-*/
-
-/*
-    public: esto es un modificador de visibilidad, quiere decir que este método puede ser invocado desde cualquier otra clase
-    
-    void: lo que retorna el método, por ejemplo int, boolean, float, en el caso de void significa que no retorna nada
-    ejemplo: 
-    // estoy declarando que el método debe retornar un número int
-    public int sumar(int valor1, int valor2) {
-        return valor1+valor2;
-    }
-
-    cantar() : el nombre del método y los parámetros que recibe, dado que es (), significa que no recibe parámetros. 
-    Los parámetros se pasan igual como declarar atributos  <tipoDeDato> etiqueta, y se separan por coma, por ejemplo, el 
-    código del método sumar de arriba. 
-*/
-
 package personas;
 
+import constantes.Constantes;
 import poderes.IPower;
 
 public class Persona {
-    
     private byte edad;
     protected String nombre;
     private IPower power;
-
-    // Atributo ststic, existe una sola copia, compartida por todas las Personas
     private static int cantidadPersonas = 0;
-
     //Esto se ejecuta cada vez que se crea un objeto de la clase Persona, y sirve para incrementar el contador de personas creadas.
+    private int id;              // único por mutante; sirve para que solo UNO de la pareja resuelva el combate
+    private double energia;      // inicia en Constantes.ENERGIA_INICIAL; double porque el daño se divide
+    private int defensa;         // al azar entre DEFENSA_MIN y DEFENSA_MAX
+    private double x;            // posición en el campo
+    private double y;
+    private double velocidad;    // al azar entre VELOCIDAD_MIN y VELOCIDAD_MAX
+    private long finEnfriamiento; // momento (en ms) hasta el que no puede volver a pelear
     {
         cantidadPersonas++;
+        this.id = cantidadPersonas;
+        this.energia = Constantes.ENERGIA_INICIAL;
+        this.defensa = (int) (Math.random() * (Constantes.DEFENSA_MAX - Constantes.DEFENSA_MIN + 1))
+                + Constantes.DEFENSA_MIN;
+        this.velocidad = Math.random() * (Constantes.VELOCIDAD_MAX - Constantes.VELOCIDAD_MIN)
+                + Constantes.VELOCIDAD_MIN;
+        this.finEnfriamiento = 0;
     }
 
     // constructor no tiene valor de retorno, y debe llamarse igual que la clase
@@ -78,6 +62,10 @@ public class Persona {
         return this.nombre;
     }
 
+    public void setPower(IPower pPower) {
+        this.power = pPower;
+    }
+
     public void cantar() {
         // impriman un verso de no más de 4 líneas, de una canción que les guste y el autor. 
         System.out.println(
@@ -86,18 +74,82 @@ public class Persona {
             "Ey, ojalá que los mío' nunca se muden" + "\n" +
             "Y si hoy me emborracho, pues que me ayuden"); 
     }
-    
-    public void setPower(IPower pPower) {
-        this.power = pPower;
-    }
 
     public void atacar() {
-        this.power.dispararPoder();
-      
+        if (this.power != null) {
+            this.power.dispararPoder();
+        }
     }
 
-    public static int getCantidadPersonas() {
-        return cantidadPersonas;
+public IPower getPower() {
+        return this.power;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public double getEnergia() {
+        return this.energia;
+    }
+
+    public int getDefensa() {
+        return this.defensa;
+    }
+
+    public double getX() {
+        return this.x;
+    }
+
+    public double getY() {
+        return this.y;
+    }
+
+    public double getVelocidad() {
+        return this.velocidad;
+    }
+
+    // Mueve al mutante a una nueva posición. La usan Partida (posición inicial) y HiloMutante (movimiento).
+    public void setPosicion(double pX, double pY) {
+        this.x = pX;
+        this.y = pY;
+    }
+
+    public boolean tienePoder() {
+        return this.power != null;
+    }
+
+    public boolean estaVivo() {
+        return this.energia > 0;
+    }
+
+    public void recibirDanio(double pDanio) {
+        this.energia = Math.max(0, this.energia - pDanio);
+    }
+
+        // Distancia en línea recta entre este mutante y otro (teorema de Pitágoras).
+    public double distanciaA(Persona pOtra) {
+        double dx = this.x - pOtra.getX();
+        double dy = this.y - pOtra.getY();
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+    // Cada profesión puede sobrescribir este método (@Override) con su propia probabilidad.
+    public double getProbabilidadAtaque() {
+        return Constantes.PROB_ATAQUE_PERSONA;
+    }
+
+    // true = decide atacar, false = decide defender.
+    // Usa getProbabilidadAtaque(); gracias al polimorfismo, un Pirata usará la suya.
+    public boolean decidirAtacar() {
+        return Math.random() < this.getProbabilidadAtaque();
+    }
+
+    public boolean puedeCombatir() {
+        return System.currentTimeMillis() >= this.finEnfriamiento;
+    }
+
+    public void iniciarEnfriamiento() {
+        this.finEnfriamiento = System.currentTimeMillis() + Constantes.ENFRIAMIENTO_COMBATE_MS;
     }
 
 }
