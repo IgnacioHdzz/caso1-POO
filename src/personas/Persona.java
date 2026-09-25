@@ -81,7 +81,11 @@ public class Persona {
         }
     }
 
-public IPower getPower() {
+    public static int getCantidadPersonas() {
+        return cantidadPersonas;
+    }
+
+    public IPower getPower() {
         return this.power;
     }
 
